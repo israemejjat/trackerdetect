@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRACKER DETECT - ROMITEF</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #E1F2FF; 
+            color: #000000; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        header {
+            background: linear-gradient(to right, #ADD8E6, #B0E0E6); 
+            width: 100%;
+            padding: 30px;
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: #2C2C2C;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header img {
+            max-width: 150px; 
+            margin: 10px 0;
+        }
+
+        .description {
+            width: 80%;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 500;
+            color: #2C2C2C;
+            line-height: 1.6;
+        }
+
+        #map {
+            width: 80%;
+            height: 500px;
+            margin-top: 30px;
+        }
+
+        .historique {
+            margin-top: 30px;
+            width: 80%;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .historique h3 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #164f7b;
+        }
+
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+        }
+
+        .history-item .location {
+            font-weight: 500;
+            color: #2C2C2C;
+        }
+
+        .history-item .time {
+            font-weight: 500;
+            color: #777;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 14px;
+            color: #2C2C2C;
+        }
+
+        .team {
+            font-size: 16px;
+            font-weight: 500;
+            color: #2C2C2C;
+            margin-top: 20px;
+        }
+
+        .team b {
+            color: #FFC0CB;
+        }
+    </style> 
+</head>
+<body>
+
+    <header>
+        TRACKER DETECT
+    </header>
+
+    <div class="description">
+        <p>Bienvenue sur TRACKER DETECT, un projet passionnant qui vise à démontrer le rôle des microprocesseurs dans les technologies du futur. Suivez les données GPS en temps réel et explorez l'impact de ces technologies dans un environnement interactif.</p>
+    </div>
+
+    <div id="map"></div>
+
+    <div class="historique">
+        <h3>Historique des Localisations</h3>
+        <div class="history-item">
+            <span class="location">Lat: 33.246661, Long: -8.499092</span>
+            <span class="time">2025-02-21 18:32</span>
+        </div>
+        <div class="history-item">
+            <span class="location">Lat: 33.225800, Long: -8.487500</span>
+            <span class="time">2025-01-10 16:02</span>
+        </div>
+        <div class="history-item">
+            <span class="location">Lat: 33.226100, Long: -8.486800</span>
+            <span class="time">2025-01-06 10:06</span>
+        </div>
+        <div class="history-item">
+            <span class="location">Lat: 33.226400, Long: -8.485900</span>
+            <span class="time">2024-01-29 20:15</span>
+        </div>
+        <div class="history-item">
+            <span class="location">Lat: 33.226700, Long: -8.485200</span>
+            <span class="time">2024-12-16 14:50</span>
+        </div>
+        <div class="history-item">
+            <span class="location">Lat: 33.227000, Long: -8.484500</span>
+            <span class="time">2024-12-08 18:42</span>
+        </div>
+        <div class="history-item">
+            <span class="location">Lat: 33.227300, Long: -8.483800</span>
+            <span class="time">2024-11-29 16:20</span>
+        </div>
+        <div class="history-item">
+            <span class="location">Lat: 33.227600, Long: -8.483100</span>
+            <span class="time">2024-11-18 14:35</span>
+        </div>
+        <div class="history-item">
+            <span class="location">Lat: 33.227900, Long: -8.482400</span>
+            <span class="time">2024-11-13 10:41</span>
+        </div>
+        <div class="history-item">
+            <span class="location">Lat: 33.228200, Long: -8.481700</span>
+            <span class="time">2024-11-07 09:34</span>
+        </div>
+    </div>
+
+    <footer>
+        <p>Encadré par M. El Kafi | Réalisé par : Mejjat Israe, Chaabi Salma, Anid Bouchra, El Aroua Hassnae, El Yaziji Nawal</p>
+        <p>Événement : <b>ROMITEF</b> - Rôle des Microprocesseurs dans les Technologies du Futur</p>
+        <img src="logouniv.jpeg" alt="Logo Université">
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('map').setView([33.22187912955811, -8.486423836193445], 13); 
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+       
+        const marker = L.marker([33.22187912955811, -8.486423836193445]).addTo(map); 
+
+        const fetchLocation = async () => {
+            try {
+                const response = await fetch('/current-position');
+                const { latitude, longitude } = await response.json();
+
+                if (latitude && longitude) {
+                    marker.setLatLng([latitude, longitude]);
+                    map.setView([latitude, longitude], 13);
+                } else {
+                    console.log("Aucune localisation en direct, affichage de la position par défaut.");
+                }
+            } catch (err) {
+                console.error('Erreur lors de la récupération des données GPS :', err);
+            }
+        };
+
+        fetchLocation();
+        setInterval(fetchLocation, 5000);
+    </script>
+</body>
+</html>
